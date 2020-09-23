@@ -8,13 +8,18 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.all('*', function (request, response, next) {
+  response.header('Access-Control-Allow-Origin', '*');
+  response.header('Access-control-Allow-Headers', 'xCors,Content-Type');
+  response.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,PUT,PATCH,OPTIONS,HEAD,FETCH');
+  next();
+});
+
 // router
 var indexRouter = require('./router/index');
 var loginRouter = require('./router/login');
-var signup = require('./router/signup');
 app.use('/', indexRouter);
 app.use('/api/login', loginRouter);
-app.use('/api/signup', signup);
 
 // AddListener
 const PORT = process.env.PORT || 8088;
