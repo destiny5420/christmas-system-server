@@ -1,21 +1,20 @@
 var express = require('express');
 var app = express();
 
-
 var path = require('path');
 var cookieParser = require('cookie-parser');
-
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-
 // router
+var indexRouter = require('./router/index');
 var loginRouter = require('./router/login');
 var signup = require('./router/signup');
-app.use("/api/login", loginRouter);
-app.use("/api/signup", signup);
+app.use('/', indexRouter);
+app.use('/api/login', loginRouter);
+app.use('/api/signup', signup);
 
 // AddListener
 const PORT = process.env.PORT || 8088;
