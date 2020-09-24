@@ -1,12 +1,19 @@
 var express = require('express');
 var app = express();
-
+var bodyParser = require('body-parser');
+var session = require('express-session');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 
-var bodyParser = require('body-parser');
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+  session({
+    secret: 'mysupersecret',
+    resave: true,
+    saveUninitialized: true,
+  }),
+);
 
 app.all('*', function (request, response, next) {
   response.header('Access-Control-Allow-Origin', '*');
