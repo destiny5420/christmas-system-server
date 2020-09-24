@@ -18,6 +18,8 @@ router.post('/sign-in', function (request, response) {
 
       response.send({
         success: true,
+        message: 'successful login',
+        uid: result.user.uid,
       });
     })
     .catch((err) => {

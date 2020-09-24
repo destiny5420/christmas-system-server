@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser('mysupersecret'));
 app.use(
   session({
     secret: 'mysupersecret',
@@ -16,8 +17,9 @@ app.use(
 );
 
 app.all('*', function (request, response, next) {
-  response.header('Access-Control-Allow-Origin', '*');
-  response.header('Access-control-Allow-Headers', 'xCors,Content-Type');
+  response.header('Access-Control-Allow-Origin', 'http://localhost:8081');
+  response.header('Access-Control-Allow-Credentials', 'true');
+  response.header('Access-control-Allow-Headers', 'X-Requested-With,xCors,Content-Type');
   response.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,PUT,PATCH,OPTIONS,HEAD,FETCH');
   next();
 });
@@ -25,8 +27,10 @@ app.all('*', function (request, response, next) {
 // router
 var indexRouter = require('./router/index');
 var loginRouter = require('./router/login');
+var userRouter = require('./router/user');
 app.use('/', indexRouter);
 app.use('/api/login', loginRouter);
+app.use('/api/user', userRouter);
 
 // AddListener
 const PORT = process.env.PORT || 8088;
