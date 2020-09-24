@@ -1,7 +1,7 @@
 .DS_Store
 node_modules
 /dist
-
+securerfile
 
 # local env files
 .env
