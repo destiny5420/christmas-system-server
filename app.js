@@ -5,7 +5,12 @@ var session = require('express-session');
 var history = require('connect-history-api-fallback');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-app.use(history());
+app.use(
+  history({
+    htmlAcceptHeaders: ['text/html', '/'],
+    // htmlAcceptHeaders: ['text/html', 'application/xhtml+xml']
+  }),
+);
 app.use(express.static('./dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
