@@ -5,8 +5,8 @@ var session = require('express-session');
 var history = require('connect-history-api-fallback');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-
 app.use(history());
+app.use(express.static('./dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser('mysupersecret'));
@@ -27,10 +27,10 @@ app.all('*', function (request, response, next) {
 });
 
 // router
-var indexRouter = require('./router/index');
+// var indexRouter = require('./router/index');
 var loginRouter = require('./router/login');
 var userRouter = require('./router/user');
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/user', userRouter);
 
