@@ -6,7 +6,7 @@ var path = require('path');
 router.get('/login', function (request, response) {
   // const url = '/dist/index.html';
   // response.sendfile(path.join(path.dirname(require.main.filename), url));
-  // response.send('Hello, this is christmax-v2 server');
+  response.send('Hello, this is christmax-v2 server');
 });
 
 module.exports = router;

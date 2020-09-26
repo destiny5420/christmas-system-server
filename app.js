@@ -32,10 +32,10 @@ app.all('*', function (request, response, next) {
 });
 
 // router
-// var indexRouter = require('./router/index');
+var indexRouter = require('./router/index');
 var loginRouter = require('./router/login');
 var userRouter = require('./router/user');
-// app.use('/', indexRouter);
+app.use('/', indexRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/user', userRouter);
 
